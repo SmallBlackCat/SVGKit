@@ -832,6 +832,11 @@ static inline CGPoint SVGCurveReflectedControlPoint(SVGCurve prevCurve)
 	CGFloat	x1p = cosPhi * (x1-x2)/2. + sinPhi * (y1-y2)/2.;
 	CGFloat	y1p = -sinPhi * (x1-x2)/2. + cosPhi * (y1-y2)/2.;
 	
+	/// 修复iOS8下崩溃问题
+	if (x1p == 0 || y1p == 0) {
+        	return CGPointMake(x2, y2);
+    	}
+	
 	CGFloat lhs;
 	{
 		CGFloat rx_2 = rx * rx;
